@@ -25,6 +25,11 @@ i18n.configure({
 // Initialize express server object
 const app: express.Application = express();
 
+// Use Body parser middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
+
 // Use i18n middleware
 app.use(i18n.init);
 
