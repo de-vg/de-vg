@@ -2,7 +2,8 @@ extends layout.pug
 block content 
     h1.title= __("Shorten")
     if error
-        .notification.is-danger= error
+        .notification.is-danger
+            | #{__("Error")}: #{error}
     form(action="" method="POST")
         .field
             label.label= __("URL")

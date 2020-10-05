@@ -5,5 +5,6 @@
     "Go!": "Los!",
     "Disclaimer": "Mit dem Anklicken des \"Los!\"-Buttons akzeptieren Sie die Datenschutzerklärung und die Nutzungsbedingungen.",
     "ErrorVirustotal": "Diese URL wurde durch VirusTotal® als gefährlich eingestuft.",
-    "ErrorNoUrl": "Bitte geben Sie eine URL an."
+    "ErrorNoUrl": "Bitte geben Sie eine URL an.",
+    "Error": "Fehler"
 }
