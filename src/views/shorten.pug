@@ -11,7 +11,8 @@ block content
             center 
                 b de.vg/#{slug}
             br
-            #[b=__("EditLink"):] #[span https://de.vg/#{slug}/#{token}]
+            b=__("EditLink") 
+            span https://de.vg/#{slug}/#{token}]
     form(action="" method="POST")
         .field
             label.label= __("URL")
