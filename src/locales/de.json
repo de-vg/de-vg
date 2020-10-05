@@ -4,9 +4,9 @@
     "URL": "URL (Adresse)",
     "Go!": "Los!",
     "Disclaimer": "Mit dem Anklicken des \"Los!\"-Buttons akzeptieren Sie die Datenschutzerklärung und die Nutzungsbedingungen.",
-    "ErrorVirustotal": "Diese URL wurde durch VirusTotal® als gefährlich eingestuft.",
+    "ErrorVirustotal": "Diese URL entspricht nicht unseren Nutzungsbedingungen.",
     "ErrorNoUrl": "Bitte geben Sie eine URL an.",
-    "ErrorPorn": "Diese URL wurde als pornografisch eingestuft.",
-    "ErrorUrlShortener": "Diese URL gehört bereits zu einem anderen URL-Kürzer.",
+    "ErrorPorn": "Diese URL entspricht nicht unseren Nutzungsbedingungen.",
+    "ErrorUrlShortener": "Diese URL entspricht nicht unseren Nutzungsbedingungen.",
     "Error": "Fehler"
 }
