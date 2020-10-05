@@ -9,7 +9,9 @@ block content
             | #{__("Success")}
             br
             center 
-                h3 de.vg/#{slug}
+                b de.vg/#{slug}
+            br
+            #[b=__("EditLink"):] #[span https://de.vg/#{slug}/#{token}]
     form(action="" method="POST")
         .field
             label.label= __("URL")
