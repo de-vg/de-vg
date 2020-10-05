@@ -7,6 +7,7 @@ import bodyParser from "body-parser";
 import i18n from "i18n";
 
 import {checkUrl} from "./virustotal";
+import * as blocklist from "./blocklist";
 
 
 // Define HTTP port
@@ -60,7 +61,21 @@ app.post("/", async (req: express.Request, res: express.Response) => {
     if(req.body.url) {
         const url: string = req.body.url;
         if(await checkUrl(url)) {
-            res.send("Success!");
+            if(await blocklist.checkUrlShortener(url)) {
+                if(await blocklist.checkPornTop1Million(url)) {
+                    res.send("Success!");
+                } else {
+                    res.render("shorten", {
+                        url: url,
+                        error: res.__("ErrorPorn")
+                    });
+                }
+            } else {
+                res.render("shorten", {
+                    url: url,
+                    error: res.__("ErrorUrlShortener")
+                });
+            }
         } else {
             res.render("shorten", {
                 url: url,
