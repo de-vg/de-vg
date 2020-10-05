@@ -6,7 +6,7 @@ import mysql2 from "mysql2";
 import bodyParser from "body-parser";
 import i18n from "i18n";
 
-import virustotal from "./virustotal";
+import {checkUrl} from "./virustotal";
 
 
 // Define HTTP port
@@ -54,7 +54,7 @@ app.get("/", (req: express.Request, res: express.Response) => {
 app.post("/", async (req: express.Request, res: express.Response) => {
     if(req.body.url) {
         const url: string = req.body.url;
-        if(await virustotal(url)) {
+        if(await checkUrl(url)) {
             res.send("Success!");
         } else {
             res.render("shorten", {
