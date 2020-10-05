@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "src/index.ts",
   "repository": "https://github.com/de-vg/de-vg.git",
-  "author": "Marvin Schopf <marvin@schopf.biz>",
+  "author": "Marvin Schopf",
   "license": "AGPL-v3.0",
   "private": false,
   "devDependencies": {
