@@ -1,7 +1,8 @@
 extends layout.pug
 block content 
     h1.title= __("Shorten")
-    p= __("Secure URL shortener made in Germany")
+    if error
+        .notification.is-danger= error
     form(action="" method="POST")
         .field
             label.label= __("URL")

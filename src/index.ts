@@ -52,13 +52,19 @@ app.get("/", (req: express.Request, res: express.Response) => {
 });
 
 app.post("/", async (req: express.Request, res: express.Response) => {
-    const url: string = req.body.url;
-    if(await virustotal(url)) {
-        res.send("Success!");
+    if(req.body.url) {
+        const url: string = req.body.url;
+        if(await virustotal(url)) {
+            res.send("Success!");
+        } else {
+            res.render("shorten", {
+                url: url,
+                error: res.__("ErrorVirustotal")
+            });
+        }
     } else {
         res.render("shorten", {
-            url: url,
-            error: res.__("ErrorVirustotal")
+            error: res.__("ErrorNoUrl")
         });
     }
 });

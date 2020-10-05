@@ -3,5 +3,7 @@
     "Secure URL shortener made in Germany": "Sicherer URL-Kürzer aus Deutschland",
     "URL": "URL (Adresse)",
     "Go!": "Los!",
-    "Disclaimer": "Mit dem Anklicken des \"Los!\"-Buttons akzeptieren Sie die Datenschutzerklärung und die Nutzungsbedingungen."
+    "Disclaimer": "Mit dem Anklicken des \"Los!\"-Buttons akzeptieren Sie die Datenschutzerklärung und die Nutzungsbedingungen.",
+    "ErrorVirustotal": "Diese URL wurde durch VirusTotal® als gefährlich eingestuft.",
+    "ErrorNoUrl": "Bitte geben Sie eine URL an."
 }
