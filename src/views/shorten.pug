@@ -1,0 +1,17 @@
+extends layout.pug
+block content 
+    h1.title= __("Shorten")
+    p= __("Secure URL shortener made in Germany")
+    form(action="" method="POST")
+        .field
+            label.label= __("URL")
+            .control 
+                input(type="url" placeholder= __("URL") required).input
+        .field
+            .control
+                input(type="submit").button= __("Go!")
+        p
+            b= __("Disclaimer")
+        
+
+
