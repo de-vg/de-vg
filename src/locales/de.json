@@ -8,5 +8,6 @@
     "ErrorNoUrl": "Bitte geben Sie eine URL an.",
     "ErrorPorn": "Diese URL entspricht nicht unseren Nutzungsbedingungen.",
     "ErrorUrlShortener": "Diese URL entspricht nicht unseren Nutzungsbedingungen.",
-    "Error": "Fehler"
+    "Error": "Fehler",
+    "Success": "Erfolg"
 }

@@ -4,6 +4,12 @@ block content
     if error
         .notification.is-danger
             | #{__("Error")}: #{error}
+    if success
+        .notification.is-success
+            | #{__("Success")}
+            br
+            center 
+                h3 de.vg/#{slug}
     form(action="" method="POST")
         .field
             label.label= __("URL")

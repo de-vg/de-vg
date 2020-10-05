@@ -1,0 +1,1 @@
+CREATE TABLE `Redirects` (`id` INT NOT NULL AUTO_INCREMENT, `slug` VARCHAR(255) NOT NULL, `target` TEXT(10000) NOT NULL, `locked` INT(1) NOT NULL DEFAULT '0', `deleted` INT(1) DEFAULT '0', `password` TEXT(1000), `expires` DATETIME, `token` TEXT(1000), `maximumHits` INT, PRIMARY KEY (`id`)) ENGINE=InnoDB;
