@@ -115,8 +115,19 @@ app.post("/", async (req: express.Request, res: express.Response) => {
     }
 });
 
-app.get("/:url", (req: express.Request, res: express.Response) => {
-
+app.get("/:slug", async (req: express.Request, res: express.Response) => {
+    const slug: string = req.params.slug;
+    let redirects: any;
+    let blackhole: any;
+    [redirects, blackhole] = await mysql.promise().query("SELECT * FROM Redirects WHERE slug = ? AND deleted = 0 AND locked = 0;", [
+        slug
+    ]);
+    if(redirects.length == 1) {
+        res.redirect(302, redirects[0].target);
+    } else {
+        res.status(404);
+        res.send("404");
+    }
 });
 
 // Start server
