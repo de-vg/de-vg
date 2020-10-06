@@ -5,7 +5,7 @@ import express from "express";
 import mysql2 from "mysql2";
 import bodyParser from "body-parser";
 import argon2 from "argon2";
-import parseUrl from "parse-url";
+import parseUrl from "url-parse";
 import i18n from "i18n";
 
 import {checkUrl} from "./virustotal";
@@ -71,7 +71,10 @@ function makeSlug(length: number): string {
 
 app.post("/", async (req: express.Request, res: express.Response) => {
     if(req.body.url) {
-        const url: string = req.body.url;
+        let url: string = req.body.url;
+        if (!/^https?:\/\//i.test(url)) {
+            url = 'http://' + url;
+        }
         if(await checkUrl(url)) {
             if(await blocklist.checkUrlShortener(url)) {
                 if(await blocklist.checkPornTop1Million(url)) {
