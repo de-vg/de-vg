@@ -17,9 +17,16 @@ block content
         .form-group
             label(for="url")= __("URL")
             input(type="text" placeholder=__("URL") required name="url" value= url)#url.form-control
-        .form-group
-            label(for="password")= __("SetPassword")
-            input(type="password" placeholder=__("Password") name="password")#password.form-control
+        .accordion
+            .card
+                .card-header#headingOne
+                    h5.mb-0
+                        button.btn.btn-link.collapsed(data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne")= __("SetPassword")
+                .collapse#collapseOne(aria-labelledby="headingOne" data-parent="#accordion")
+                    .card-body
+                        .form-group
+                            label(for="password")= __("SetPassword")
+                            input(type="password" placeholder=__("Password") name="password")#password.form-control
         input(type="submit" value=__("Go!")).btn.btn-primary.w-100
         p
             b= __("Disclaimer")
