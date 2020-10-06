@@ -10,5 +10,7 @@
     "ErrorUrlShortener": "Diese URL entspricht nicht unseren Nutzungsbedingungen.",
     "Error": "Fehler",
     "Success": "Erfolg",
-    "EditLink": "Link zum Bearbeiten"
+    "EditLink": "Link zum Bearbeiten",
+    "SetPassword": "Passwort festlegen (optional)",
+    "Password": "Passwort"
 }

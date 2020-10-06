@@ -17,6 +17,9 @@ block content
         .form-group
             label(for="url")= __("URL")
             input(type="text" placeholder=__("URL") required name="url" value= url)#url.form-control
+        .form-group
+            label(for="password")= __("SetPassword")
+            input(type="password" placeholder=__("Password"))#password.form-control
         input(type="submit" value=__("Go!")).btn.btn-primary.w-100
         p
             b= __("Disclaimer")

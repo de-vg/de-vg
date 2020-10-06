@@ -80,13 +80,22 @@ app.post("/", async (req: express.Request, res: express.Response) => {
                 if(await blocklist.checkPornTop1Million(url)) {
                     const slug: string = makeSlug(3);
                     const token: string = makeSlug(128);
-                    await mysql.promise().query("INSERT INTO Redirects (slug, target, token, maximumHits) VALUES (?, ?, ?, ?);", [
+                    let password: string = "";
+                    if(req.body.password) {
+                        if(req.body.password.length >= 1) {
+                            password = req.body.password;
+                        }
+                    }
+                    await mysql.promise().query("INSERT INTO Redirects (slug, target, token, maximumHits, password) VALUES (?, ?, ?, ?, ?);", [
                         slug,
                         parseUrl(url).href,
                         await argon2.hash(token, {
                             type: argon2.argon2id
                         }),
-                        0
+                        0,
+                        await argon2.hash(password, {
+                            type: argon2.argon2id
+                        })
                     ]);
                     res.render("shorten", {
                         success: res.__("Success"),
@@ -127,7 +136,43 @@ app.get("/:slug", async (req: express.Request, res: express.Response) => {
         slug
     ]);
     if(redirects.length == 1) {
-        res.redirect(302, redirects[0].target);
+        const redirect: any = redirects[0];
+        if(redirect.password && redirect.password.length >= 1) {
+            res.render("password", {
+                slug: redirect.slug,
+                target: redirect.target
+            });
+        } else {
+            res.redirect(302, redirects[0].target);
+        }
+    } else {
+        res.status(404);
+        res.send("404");
+    }
+});
+
+app.post("/:slug", async (req: express.Request, res: express.Response) => {
+    const slug: string = req.params.slug;
+    let redirects: any;
+    let blackhole: any;
+    [redirects, blackhole] = await mysql.promise().query("SELECT * FROM Redirects WHERE slug = ? AND deleted = 0 AND locked = 0;", [
+        slug
+    ]);
+    if(redirects.length == 1) {
+        const redirect: any = redirects[0];
+        if(redirect.password && redirect.password.length >= 1) {
+            if(await argon2.verify(redirect.password, req.body.password)) {
+                res.redirect(302, redirect.target);
+            } else {
+                res.render("password", {
+                    slug: redirect.slug,
+                    target: redirect.target,
+                    error: res.__("WrongPassword")
+                });
+            }
+        } else {
+            res.redirect(302, redirects[0].target);
+        }
     } else {
         res.status(404);
         res.send("404");
