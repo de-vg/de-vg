@@ -161,13 +161,21 @@ app.post("/:slug", async (req: express.Request, res: express.Response) => {
     if(redirects.length == 1) {
         const redirect: any = redirects[0];
         if(redirect.password && redirect.password.length >= 1) {
-            if(await argon2.verify(redirect.password, req.body.password)) {
-                res.redirect(302, redirect.target);
+            if(req.body.password && req.body.password.length >= 1) {
+                if(await argon2.verify(redirect.password, req.body.password)) {
+                    res.redirect(302, redirect.target);
+                } else {
+                    res.render("password", {
+                        slug: redirect.slug,
+                        target: redirect.target,
+                        error: res.__("WrongPassword")
+                    });
+                }
             } else {
                 res.render("password", {
                     slug: redirect.slug,
                     target: redirect.target,
-                    error: res.__("WrongPassword")
+                    error: res.__("NoPassword")
                 });
             }
         } else {

@@ -12,5 +12,8 @@
     "Success": "Erfolg",
     "EditLink": "Link zum Bearbeiten",
     "SetPassword": "Passwort festlegen (optional)",
-    "Password": "Passwort"
+    "Password": "Passwort",
+    "WrongPassword": "Das angegebene Passwort ist falsch.",
+    "NoPassword": "Es wurde kein Passwort angegeben.",
+    "EnterPassword": "Bitte geben Sie das festgelegte Passwort ein."
 }
