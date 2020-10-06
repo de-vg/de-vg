@@ -5,7 +5,7 @@ import express from "express";
 import mysql2 from "mysql2";
 import bodyParser from "body-parser";
 import argon2 from "argon2";
-import Url from "url-parse";
+import parseUrl from "parse-url";
 import i18n from "i18n";
 
 import {checkUrl} from "./virustotal";
@@ -79,7 +79,7 @@ app.post("/", async (req: express.Request, res: express.Response) => {
                     const token: string = makeSlug(128);
                     await mysql.promise().query("INSERT INTO Redirects (slug, target, token, maximumHits) VALUES (?, ?, ?, ?);", [
                         slug,
-                        new Url(url).href,
+                        parseUrl(url).href,
                         await argon2.hash(token, {
                             type: argon2.argon2id
                         }),
