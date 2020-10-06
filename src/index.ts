@@ -80,13 +80,7 @@ app.post("/", async (req: express.Request, res: express.Response) => {
                 if(await blocklist.checkPornTop1Million(url)) {
                     const slug: string = makeSlug(3);
                     const token: string = makeSlug(128);
-                    let password: string = "";
-                    if(req.body.password) {
-                        if(req.body.password.length >= 1) {
-                            password = req.body.password;
-                        }
-                    }
-                    if(password.length >= 1) {
+                    if(req.body.password && req.body.password.length >= 1) {
                         await mysql.promise().query("INSERT INTO Redirects (slug, target, token, maximumHits, password) VALUES (?, ?, ?, ?, ?);", [
                             slug,
                             parseUrl(url).href,
@@ -94,7 +88,7 @@ app.post("/", async (req: express.Request, res: express.Response) => {
                                 type: argon2.argon2id
                             }),
                             0,
-                            await argon2.hash(password, {
+                            await argon2.hash(req.body.password, {
                                 type: argon2.argon2id
                             })
                         ]);
