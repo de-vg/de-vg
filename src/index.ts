@@ -86,17 +86,28 @@ app.post("/", async (req: express.Request, res: express.Response) => {
                             password = req.body.password;
                         }
                     }
-                    await mysql.promise().query("INSERT INTO Redirects (slug, target, token, maximumHits, password) VALUES (?, ?, ?, ?, ?);", [
-                        slug,
-                        parseUrl(url).href,
-                        await argon2.hash(token, {
-                            type: argon2.argon2id
-                        }),
-                        0,
-                        await argon2.hash(password, {
-                            type: argon2.argon2id
-                        })
-                    ]);
+                    if(password.length >= 1) {
+                        await mysql.promise().query("INSERT INTO Redirects (slug, target, token, maximumHits, password) VALUES (?, ?, ?, ?, ?);", [
+                            slug,
+                            parseUrl(url).href,
+                            await argon2.hash(token, {
+                                type: argon2.argon2id
+                            }),
+                            0,
+                            await argon2.hash(password, {
+                                type: argon2.argon2id
+                            })
+                        ]);
+                    } else {
+                        await mysql.promise().query("INSERT INTO Redirects (slug, target, token, maximumHits) VALUES (?, ?, ?, ?);", [
+                            slug,
+                            parseUrl(url).href,
+                            await argon2.hash(token, {
+                                type: argon2.argon2id
+                            }),
+                            0
+                        ]);
+                    }
                     res.render("shorten", {
                         success: res.__("Success"),
                         url: url,
